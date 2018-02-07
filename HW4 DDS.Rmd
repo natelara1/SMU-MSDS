@@ -1,0 +1,25 @@
+---
+title: "HW4 DDS"
+author: "Nate Lara"
+date: "February 7, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{R, echo=TRUE}
+#http://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/
+#install.packages("fivethirtyeight")
+data(list = character(), package = "fivethirtyeight")
+data(college_recent_grads, package = "fivethirtyeight")
+df <- as.data.frame(college_recent_grads)
+dim(df)
+colnames(df)
+nrow(df)
+major_count <- table(df$major_category)
+barplot(major_count, main="Distribution of Majors for Recent College Graduates", xlab = "Number of Graduates Within Each Major", col=c("blue"), horiz=TRUE)
+```
+
