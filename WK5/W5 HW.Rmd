@@ -1,0 +1,67 @@
+---
+title: "HW5 DDS"
+author: "Nate Lara"
+date: "February 14, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# URL: https://github.com/natelara1/SMU-MSDS/tree/master/WK5
+#1.
+
+```{R, echo=TRUE}
+yob2016 <- read.table("C:/Users/Nathan/Desktop/DS/DoingDataScience/Weeks/W5/yob2016.txt", quote="\"", comment.char="")
+df <- yob2016
+View(df) 
+#add human readable column names
+colnames(df) <- c("First Name","Gender", "Amount of Children")
+#view summary
+summary(df)
+#search for yyy
+grep("yyy", df$`First Name`)
+# output shows 212 (Fionayyy)
+#remove 212
+df <- df[-c(212), ]
+```
+
+
+#2.
+```{R, echo=TRUE}
+yob2015 <- read.table("C:/Users/Nathan/Desktop/DS/DoingDataScience/Weeks/W5/yob2015.txt", quote="\"", comment.char="")
+
+
+#add human readable column names
+colnames(yob2015) <- c("First Name","Gender", "Amount of Children")
+#set yob with colunames to y2015
+y2015 = yob2015
+#observe last 10
+ tail(y2015, 10)
+# interesting that it's all male and they are all at 5 
+
+# merge columns
+final <- merge(df,y2015,by=c("First Name","Gender"))
+```
+#3
+```{R, echo=TRUE}
+#create column named total
+final["Total"] <- NA
+# add total amount of 2015 to 2016
+final$Total <- final$`Amount of Children.x` + final$`Amount of Children.y`
+```
+
+
+# 26,550
+```{R, echo=TRUE}
+sortedtotal <- final[order(final$Total), ]
+```
+#Observation of top 10 Emma, Olivia, Noah, Liam, Sophia, Ava, Mason, William, Jacob, Isabella
+```{R, echo=TRUE}
+# Omit Males
+ sortedfinal <- sortedtotal[-grep('M',sortedtotal$Gender),]
+```
+#observe females put in CSV and move to git
+
+
+```
